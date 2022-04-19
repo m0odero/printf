@@ -13,9 +13,7 @@ int _printf(const char *format, ...)
 {
 	va_list ap;
 	char *string;
-	int i = 0;
-	int num = 0;
-	int n;
+	int i, n, num = 0;
 
 	va_start(ap, format);
 	while (format[i])
@@ -51,8 +49,7 @@ int _printf(const char *format, ...)
 		i++;
 	}
 	va_end(ap);
-	n = printf("\n");
-	num = num + n;
+	num = num + printf("\n");
 	return (num);
 }
 
