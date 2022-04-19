@@ -44,7 +44,10 @@ int _printf(const char *format, ...)
 		num = num + n;
 		if ((format[i] == 'c' || format[i] == 'i' || format[i] == 'f' ||
 					format[i] == 's') && format[(i + 1)] != '\0')
+		{
 			n = printf(", ");
+			num = num + n;
+		}
 		i++;
 	}
 	va_end(ap);
