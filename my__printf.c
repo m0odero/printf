@@ -20,14 +20,17 @@ int _printf(const char *format, ...)
 	{
 		switch (format[i])
 		{
+			case 'b':
+				n = printf("%u", convert(va_arg(ap, unsigned int), 2));
+				break;
+			case 'd':
+				n = printf("%u", convert(va_arg(ap, unsigned int), 10));
+				break;
 			case 'c':
 				n = printf("%c", (char) va_arg(ap, int));
 				break;
 			case 'i':
 				n = printf("%d", va_arg(ap, int));
-				break;
-			case 'f':
-				n = printf("%f", (float) va_arg(ap, double));
 				break;
 			case 's':
 				string = va_arg(ap, char*);
@@ -40,8 +43,7 @@ int _printf(const char *format, ...)
 				break;
 		}
 		num = num + n;
-		if ((format[i] == 'c' || format[i] == 'i' || format[i] == 'f' ||
-					format[i] == 's') && format[(i + 1)] != '\0')
+		if (format[(i + 1)] != '\0')
 		{
 			n = printf(", ");
 			num = num + n;
@@ -52,4 +54,15 @@ int _printf(const char *format, ...)
 	num = num + printf("\n");
 	return (num);
 }
-
+unsigned int convert(unsigned int ui, int base)
+{
+	if (ui == 0)
+	{
+		return (0);
+	}
+	if (ui == 1)
+	{
+		return (1);                       /* optional */
+	}
+	return ((ui % base) + 10 * convert(ui / base, base));
+}
