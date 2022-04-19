@@ -14,39 +14,42 @@ int _printf(const char *format, ...)
 	va_list ap;
 	char *string;
 	int i = 0;
+	int num = 0;
+	int n;
 
 	va_start(ap, format);
-
 	while (format[i])
 	{
 		switch (format[i])
 		{
 			case 'c':
-				printf("%c", (char) va_arg(ap, int));
+				n = printf("%c", (char) va_arg(ap, int));
 				break;
 			case 'i':
-				printf("%d", va_arg(ap, int));
+				n = printf("%d", va_arg(ap, int));
 				break;
 			case 'f':
-				printf("%f", (float) va_arg(ap, double));
+				n = printf("%f", (float) va_arg(ap, double));
 				break;
 			case 's':
 				string = va_arg(ap, char*);
 				if (string != NULL)
 				{
-					printf("%s", string);
+					n = printf("%s", string);
 					break;
 				}
 				printf("(nil)");
 				break;
 		}
+		num = num + n;
 		if ((format[i] == 'c' || format[i] == 'i' || format[i] == 'f' ||
 					format[i] == 's') && format[(i + 1)] != '\0')
-			printf(", ");
+			n = printf(", ");
 		i++;
 	}
 	va_end(ap);
-	printf("\n");
-	return (i);
+	n = printf("\n");
+	num = num + n;
+	return (num);
 }
 
