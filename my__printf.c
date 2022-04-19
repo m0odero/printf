@@ -4,22 +4,19 @@
 #include <stdio.h>
 
 /**
- * print_all - A function prints anyting.
+ * _printf - function that returns the number of characters printed.
  * @format: A list of type of arguments passed to the function.
- * Return: Nothing
+ * Return: the number of characters printed
  */
-int _printf(const char * format, ...)
+
+int _printf(const char *format, ...)
 {
 	va_list ap;
 	char *string;
 	int i = 0;
 
 	va_start(ap, format);
-	/*while (format == NULL)
-	{
-		printf("\n");
-		return;
-	}*/
+
 	while (format[i])
 	{
 		switch (format[i])
