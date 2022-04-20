@@ -13,7 +13,9 @@ int _printf(const char *format, ...)
 {
 	va_list ap;
 	char *string;
-	int i, n, num = 0;
+	int num = 0;
+	int i = 0;
+	int n = 0;
 
 	va_start(ap, format);
 	while (format[i])
@@ -44,16 +46,20 @@ int _printf(const char *format, ...)
 		}
 		num = num + n;
 		if (format[(i + 1)] != '\0')
-		{
-			n = printf(", ");
-			num = num + n;
-		}
+			num = num + printf(", ");
 		i++;
 	}
 	va_end(ap);
-	num = num + printf("\n");
-	return (num);
+	return (num + printf("\n"));
 }
+
+/**
+ * convert - convert a number from base 10 to another number.
+ * @ui: the number to be converted
+ * @base: the base to which it should be converted
+ * Return: the converted number
+ */
+
 unsigned int convert(unsigned int ui, int base)
 {
 	if (ui == 0)
